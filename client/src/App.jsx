@@ -1,11 +1,11 @@
  import { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
- const COMPLAINT_API =
-  "https://civic-fix-i02b.onrender.com/api/complaints";
+ const AUTH_API =
+  "https://civic-fix-production.up.railway.app/api/auth";
 
-const AUTH_API =
-  "https://civic-fix-i02b.onrender.com/api/auth";
+const COMPLAINT_API =
+  "https://civic-fix-production.up.railway.app/api/complaints";
 function App() {
   const [complaints, setComplaints] = useState([]);
 
