@@ -41,28 +41,39 @@ router.post("/register", async (req, res) => {
 });
 
 // LOGIN USER
+ // LOGIN USER
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    console.log("LOGIN REQUEST:", email);
+
     const user = await User.findOne({ email });
 
     if (!user) {
+      console.log("USER NOT FOUND");
+
       return res.status(400).json({
         message: "Invalid email or password",
       });
     }
+
+    console.log("USER FOUND:", user.email);
 
     const isPasswordCorrect = await bcrypt.compare(
       password,
       user.password
     );
 
+    console.log("PASSWORD MATCH:", isPasswordCorrect);
+
     if (!isPasswordCorrect) {
       return res.status(400).json({
         message: "Invalid email or password",
       });
     }
+
+    console.log("PASSWORD CORRECT");
 
     const token = jwt.sign(
       {
@@ -75,6 +86,8 @@ router.post("/login", async (req, res) => {
       }
     );
 
+    console.log("TOKEN CREATED");
+
     res.status(200).json({
       message: "Login successful",
       token,
@@ -85,7 +98,10 @@ router.post("/login", async (req, res) => {
         role: user.role,
       },
     });
+
   } catch (error) {
+    console.error("LOGIN ERROR:", error);
+
     res.status(500).json({
       message: "Login failed",
       error: error.message,
