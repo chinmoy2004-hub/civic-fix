@@ -9,7 +9,13 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
  
 // Middleware
-app.use(cors());
+ // Middleware
+app.use(cors({
+  origin: "https://civic-fix-4.onrender.com",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 // Routes
