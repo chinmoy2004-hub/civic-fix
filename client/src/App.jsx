@@ -241,14 +241,18 @@ setImagePreview("");
       });
 
       setActivePage("home");
-    } catch (error) {
-      alert(
-        error.response?.data?.message ||
-        "Login failed!"
-      );
-    }
-  };
+      } catch (error) {
+    console.log("LOGIN ERROR:", error);
+    console.log("LOGIN RESPONSE:", error.response?.data);
+    console.log("LOGIN STATUS:", error.response?.status);
 
+    alert(
+      error.response?.data?.message ||
+      error.message ||
+      "Login failed!"
+    );
+  }
+};
   // ---------------- LOGOUT ----------------
 
   const handleLogout = () => {
